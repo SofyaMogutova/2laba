@@ -7,12 +7,16 @@ using System.Text;
         private ushort number;
         public RomanNumber(ushort n)
         {
+            if (n <= 0 || n >= 4000)
+            {
+                throw new RomanNumberException("Некорректное десятичное число");
+            }
             number = n;
         }
         //Сложение римских чисел
         public static RomanNumber Add(RomanNumber? n1, RomanNumber? n2)
         {
-            if (n1 == null || n2 == null)
+            if (n1 == null || n2 == null || n1.number + n2.number > 3999)
             { 
                 throw new RomanNumberException("Невозможно выполнить сложение");
             }
@@ -22,7 +26,7 @@ using System.Text;
         //Вычитание римских чисел
         public static RomanNumber Sub(RomanNumber? n1, RomanNumber? n2)
         {
-            if (n1 == null || n2 == null || n1.number - n2.number <=0 )
+            if (n1 == null || n2 == null || n1.number - n2.number <= 0)
             {
                 throw new RomanNumberException("Невозможно выполнить вычитание");
             }
@@ -31,7 +35,7 @@ using System.Text;
         //Умножение римских чисел
         public static RomanNumber Mul(RomanNumber? n1, RomanNumber? n2)
         {
-            if (n1 == null || n2 == null)
+            if (n1 == null || n2 == null || n1.number * n2.number > 3999)
             { 
                 throw new RomanNumberException("Невозможно выполнить умножение");
             }
@@ -52,10 +56,7 @@ using System.Text;
         {
             string str = "";
             ushort n = number;
-            if (n <= 0 || n >= 4000)
-            {
-                throw new RomanNumberException("Некорректное десятичное число");
-            }
+      
             ushort[] digit = new ushort[] { 1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000 };
             string[] roman_num = new string[] { "I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M" };
 
